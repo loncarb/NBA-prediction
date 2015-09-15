@@ -1,8 +1,7 @@
 (ns nba-prediction.routes.login
-
-(:require [compojure.core :refer :all]
+  (:require [compojure.core :refer :all]
             [nba_prediction.views.layout :as layout])
-(:use [hiccup.form :only [form-to label text-field password-field submit-button]]))
+  (:use [hiccup.form :only [form-to label text-field password-field submit-button]]))
 
 (defn login []
   (layout/common [:h1 "Please login"]
