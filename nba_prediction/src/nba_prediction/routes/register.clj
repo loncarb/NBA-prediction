@@ -1,12 +1,13 @@
 (ns nba-prediction.routes.register
   (:require [compojure.core :refer :all]
             [nba_prediction.views.layout :as layout]
-            [ring.util.response :as response])
+            [ring.util.response :as response]
+            [noir.session :as session])
   (:use [hiccup.form :only [form-to label text-field password-field submit-button]]
-        [database.mongoDB :only [insert-user]]))
+        [database.mongoDB :only [insert-user insert-admin get-user-by-username]]))
 
 (defn register []
-  (layout/common [:h1 "Register"]
+  (layout/login [:h1 "Register"]
                  (form-to [:post "/register"]
                           [:div.registerform
                            [:div 
@@ -32,6 +33,9 @@
   [firstname lastname username password email]
   (do
     (insert-user firstname lastname username password email)
+    (let [
+          user (get-user-by-username username)]
+    (session/put! :user user))
     (response/redirect "/home")))
 
 (defroutes register-routes

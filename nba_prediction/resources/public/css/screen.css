@@ -4,7 +4,38 @@ body {
     font-size: 13px;
 }
 
+header{
+	display: block;
+}
+
+.header {
+	display: block;
+	position: relative;
+	margin: 0 auto
+}
+
 h1 {
     text-align: center;
+}
+
+.logo img{
+	float: left;
+	position: relative;
+	display: inline-block;
+}
+
+.navigation {
+	
+	list-style: none;
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	
+}
+
+.navigation li{
+	
+	
+	margin: 0 0 0 5px;
 }
 
