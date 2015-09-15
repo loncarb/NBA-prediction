@@ -38,6 +38,15 @@
                    :username username
                    :password password}))
 
+(defn insert-team
+  [teamName win lost l10]
+  "Insert team into database." 
+  (insert-entity :teams 
+                  {:teamName teamName
+                   :win win
+                   :lost lost
+                   :l10 l10}))
+
 (defn get-admin-by-username
   "Find admin by username"
   [username]

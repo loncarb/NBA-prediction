@@ -16,7 +16,7 @@
   (layout/login [:h1 "Please login"]
      (form-to [:post "/"]
                           [:div.loginform
-               [:p.loginerror (session/flash-get :login-error)]
+                           [:p.loginerror (session/flash-get :login-error)]
                            [:div 
                             (label :username "Username: ")
                             (text-field :username )]

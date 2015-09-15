@@ -24,8 +24,7 @@ h1 {
 	display: inline-block;
 }
 
-.navigation {
-	
+.navigation {	
 	list-style: none;
 	float: right;
 	height: 30px;
@@ -33,9 +32,32 @@ h1 {
 	
 }
 
-.navigation li{
-	
-	
+.navigation li{	
 	margin: 0 0 0 5px;
+}
+
+table{
+	margin: 0 auto;
+}
+
+table th,
+table td{
+	padding: 7px 22px;
+	text-align: center
+}
+
+table tr th,
+table tr:nth-child(2n+1) td{
+	background-color: #c0c0c0;
+	color: #fff;
+}
+
+table h5{
+	font-size: 17px;
+	margin: 0;
+}
+
+table p{
+	margin: 0;
 }
 
