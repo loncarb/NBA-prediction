@@ -56,3 +56,23 @@
   "Find user by username"
   [username]
   (fetch-one :users :where {:username username}))
+
+(defn get-all-teams
+  "Return all teams from database"
+  []
+  (fetch :teams))
+
+(defn delete-team [id]
+  "Delete team from database."
+  (let [id1 (Integer/valueOf id)]
+  (destroy! :teams {:_id id1})))
+
+(defn update-team
+  [id teamName win lost l10]
+  "Update team from database."
+  (println id)
+  (println teamName)
+  (println win)
+  (println lost)
+  (println l10)
+   (fetch-and-modify :teams {:_id (Integer/valueOf id)} {:teamName teamName :win win :lost lost :l10 l10}))

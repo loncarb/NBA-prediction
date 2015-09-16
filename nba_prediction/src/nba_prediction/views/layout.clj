@@ -15,8 +15,6 @@
        [:a {:href "/newTeam"} "New team"]]
       [:li 
        [:a {:href "/editTeams"} "Edit teams"]]
-      [:li 
-       [:a {:href "/users"} "Users"]]
       [:li
        [:a {:href "/"} "Logout"]]]]]])
 
