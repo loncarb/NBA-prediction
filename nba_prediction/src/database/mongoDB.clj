@@ -62,17 +62,33 @@
   []
   (fetch :teams))
 
+(defn get-all-users
+  "Return all users from database"
+  []
+  (fetch :users))
+
 (defn delete-team [id]
   "Delete team from database."
   (let [id1 (Integer/valueOf id)]
   (destroy! :teams {:_id id1})))
 
+(defn delete-user [id]
+  "Delete team from database."
+  (let [id1 (Integer/valueOf id)]
+  (destroy! :users {:_id id1})))
+
 (defn update-team
   [id teamName win lost l10]
   "Update team from database."
-  (println id)
-  (println teamName)
-  (println win)
-  (println lost)
-  (println l10)
    (fetch-and-modify :teams {:_id (Integer/valueOf id)} {:teamName teamName :win win :lost lost :l10 l10}))
+
+(defn get-team-ids
+  "Gets all id from teams"
+  []
+  (fetch :teams :only {:teamName nil :win nil :lost nil :l10 nil}))
+
+(defn get-team-names
+  "Gets all names from teams"
+  []
+  (fetch :teams :only {:_id nil :win nil :lost nil :l10 nil}))
+

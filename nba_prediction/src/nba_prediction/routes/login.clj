@@ -4,7 +4,7 @@
             [ring.util.response :as response]
             [noir.session :as session])
   (:use [hiccup.form :only [form-to label text-field password-field submit-button]]
-        [database.mongoDB :only [get-admin-by-username get-user-by-username]]))
+        [database.mongoDB :only [get-admin-by-username get-user-by-username delete-user]]))
 
 (defn logout
   []
@@ -27,7 +27,7 @@
                             (submit-button "Log In")]])
      (form-to [:get "/register"]
               [:div
-                            (submit-button "Register")])))
+               (submit-button "Register")])))
 
 (defn validate-admin
   "Check if username and password for admin are a match"
