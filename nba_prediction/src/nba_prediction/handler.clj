@@ -17,7 +17,7 @@
 
 (defn insert-test-user
   []
-  (insert-user "Bogdan" "Loncar" "bogdanl@gmail.com" "bogdan" "bogdan")
+  (insert-user "Bogdan" "Loncar" "bogdanl@gmail.com" "user" "user")
   (insert-user "Marko" "Markovic" "marko@gmail.com" "marko" "marko"))
 
 (defn insert-test-admin
@@ -35,7 +35,6 @@
   (let [admin (get-admin-by-username "admin")
           user (get-all-users)
           team (get-all-teams)]
-      (println admin)
       (if-not admin (insert-test-admin))
       (if-not user (insert-test-user))
       (if-not team (insert-test-teams))))

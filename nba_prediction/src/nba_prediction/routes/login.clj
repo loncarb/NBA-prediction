@@ -48,16 +48,15 @@
 (defn do-login
   "Checks username and password"
   [username password]
-  (let [
-    admin (get-admin-by-username username)
-    error (validate-admin admin password)
-    user (get-user-by-username username)
-    error-user (validate-user user password)]
-  (cond
-    (= true error) (do (session/put! :admin admin) (response/redirect "/home"))
-    (= true error-user) (do (session/put! :user user) (response/redirect "/home"))
-    :else (do  (println error-user) (session/flash-put! :login-error "User with given username and password does not exist.")
-            (response/redirect "/error")))))
+  (let [admin (get-admin-by-username username)
+        error (validate-admin admin password)
+        user (get-user-by-username username)
+        error-user (validate-user user password)]
+    (cond
+      (= true error) (do (session/put! :admin admin) (response/redirect "/home"))
+      (= true error-user) (do (session/put! :user user) (response/redirect "/home"))
+      :else (do  (println error-user) (session/flash-put! :login-error "User with given username and password does not exist.")
+              (response/redirect "/error")))))
 
 (defroutes login-routes
   (GET "/" [] (login))

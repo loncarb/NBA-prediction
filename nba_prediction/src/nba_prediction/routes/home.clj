@@ -1,8 +1,9 @@
 (ns nba_prediction.routes.home
   (:require [compojure.core :refer :all]
             [nba_prediction.views.layout :as layout]
-            [noir.session :as session])
-  (use [database.mongoDB :only [get-all-teams get-team-names get-admin-by-username get-team-ids ]]
+            [noir.session :as session]
+            [ring.util.response :as response])
+  (use [database.mongoDB :only [get-all-teams get-team-names get-admin-by-username get-team-ids get-team-by-name]]
        [hiccup.form :only [drop-down submit-button form-to radio-button]]))
 
 (defn write-team
@@ -30,8 +31,22 @@
 
 (defn compare
   "Compares two teams"
-  []
-  )
+  [away-teamName home-teamName]
+  (let [away-team (get-team-by-name away-teamName)
+        home-team (get-team-by-name home-teamName)]
+    (let [away-win (- (Integer/valueOf (:win away-team)) (Integer/valueOf (:lost away-team)))
+          home-win (- (Integer/valueOf (:win home-team)) (Integer/valueOf (:lost home-team)))
+          away-l10 (Integer/valueOf (:l10 away-team))
+          home-l10 (Integer/valueOf (:l10 home-team))
+          win-score (- away-win home-win)]
+      (session/put! :message "")
+      (cond
+        (< 3 win-score) (session/put! :message (concat "there is high probability that " (:teamName away-team) " will win"))
+        (> -3 win-score) (session/put! :message (concat "there is high probability that " (:teamName home-team) " will win"))
+        (and (> 3 win-score) (< -3 win-score)) (cond
+                                                 (session/put! :message (< away-l10 home-l10) (concat (:teamName home-team) " has slight advatage over " (:teamName away-team)))
+                                                 (session/put! :message (< home-l10 away-l10) (concat (:teamName away-team) " has slight advatage over " (:teamName home-team)))))))
+  (response/redirect "/home"))
 
 (defn home []
   (layout/common [:h1 "Welcome"]
@@ -46,14 +61,15 @@
                      [:h5 "Lost"]]
                     [:th
                      [:h5 "Last 10"]]]
-                  (let [teams (get-all-teams)]
+                  (let [teams (get-all-teams)]                    
                     (for [team teams]
-                      (write-team team)))]]
-                 
+                      (write-team team)))]]                 
                   (form-to [:post "/home"]
                    (drop-down :away (write-in-drop-down)) "  VS  " (drop-down :home (write-in-drop-down))
-                    (submit-button "Compare"))))
+                    (submit-button "Compare"))
+                  [:br]
+                  [:p (session/get :message)]))
 
 (defroutes home-routes
   (GET "/home" [] (home))
-  (POST "/home" [] (home)))
+  (POST "/home" [away home] (compare away home)))

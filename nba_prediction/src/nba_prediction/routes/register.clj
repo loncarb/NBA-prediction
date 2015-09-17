@@ -33,9 +33,8 @@
   [firstname lastname username password email]
   (do
     (insert-user firstname lastname username password email)
-    (let [
-          user (get-user-by-username username)]
-    (session/put! :user user))
+    (let [user (get-user-by-username username)]
+      (session/put! :user user))
     (response/redirect "/home")))
 
 (defroutes register-routes

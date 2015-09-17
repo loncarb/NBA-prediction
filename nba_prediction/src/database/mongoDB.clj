@@ -92,3 +92,7 @@
   []
   (fetch :teams :only {:_id nil :win nil :lost nil :l10 nil}))
 
+(defn get-team-by-name
+  "Gets team by name"
+  [teamName]
+  (fetch-one :teams :where {:teamName teamName}))
