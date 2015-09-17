@@ -44,8 +44,8 @@
         (< 3 win-score) (session/put! :message (concat "there is high probability that " (:teamName away-team) " will win"))
         (> -3 win-score) (session/put! :message (concat "there is high probability that " (:teamName home-team) " will win"))
         (and (> 3 win-score) (< -3 win-score)) (cond
-                                                 (session/put! :message (< away-l10 home-l10) (concat (:teamName home-team) " has slight advatage over " (:teamName away-team)))
-                                                 (session/put! :message (< home-l10 away-l10) (concat (:teamName away-team) " has slight advatage over " (:teamName home-team)))))))
+                                                 (< away-l10 home-l10) (session/put! :message (concat (:teamName home-team) " has slight advatage over " (:teamName away-team)))
+                                                 (< home-l10 away-l10) (session/put! :message (concat (:teamName away-team) " has slight advatage over " (:teamName home-team)))))))
   (response/redirect "/home"))
 
 (defn home []
