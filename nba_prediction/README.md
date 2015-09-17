@@ -16,4 +16,5 @@ To start a web server for the application, run:
 ## License
 
 Copyright © 2015 Bogdan Lončar
+
 Distributed under the Eclipse Public License, the same as Clojure.
