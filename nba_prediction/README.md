@@ -1,6 +1,5 @@
 # NBA Prediction
 
-FIXME
 
 ## Prerequisites
 
