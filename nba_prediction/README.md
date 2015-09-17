@@ -1,4 +1,4 @@
-# nba_prediction
+# NBA Prediction
 
 FIXME
 
