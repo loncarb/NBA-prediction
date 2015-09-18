@@ -36,6 +36,14 @@ Download and install [MongoDB] [2]
 To start a web server for the application, run:
 
     lein ring server
+    
+User:
+* username: user
+* password: user
+
+Admin:
+* username: admin
+* password: admin
 
 ## Libraries used
 
