@@ -32,12 +32,11 @@
 
 (defn init []
   (println "nba_prediction is starting")
-  (let [admin (get-admin-by-username "admin")
-          user (get-all-users)
-          team (get-all-teams)]
-      (if-not admin (insert-test-admin))
-      (if-not user (insert-test-user))
-      (if-not team (insert-test-teams))))
+  (let [admin (get-admin-by-username "admin")]
+      (if-not admin (do 
+                      (insert-test-user) 
+                      (insert-test-admin) 
+                      (insert-test-teams)))))
 
 (defn destroy []
   (println "nba_prediction is shutting down"))
